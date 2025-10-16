@@ -3,41 +3,90 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Início ✨</title>
+  <title>Animação Inicial ✨</title>
   <link rel="stylesheet" href="style.css" />
   <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
     body {
+      background: #2b1e1e;
+      color: #fff;
+      font-family: Arial, sans-serif;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
       min-height: 100vh;
-      margin: 0;
-      background: #2b1e1e; /* fundo escuro pra combinar */
-      color: #fff;
-      font-family: Arial, sans-serif;
+      overflow: hidden;
       text-align: center;
-      padding: 20px;
     }
 
-    h1 {
-      font-size: 1.6rem;
-      margin-bottom: 10px;
+    h1, h2 {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 1s ease;
     }
 
-    h2 {
-      font-size: 1.2rem;
-      margin-bottom: 20px;
-      font-weight: normal;
-      color: #f5d68f;
+    h1.show, h2.show {
+      opacity: 1;
+      transform: translateY(0);
     }
 
-    .hero-img {
-      max-width: 90%;
-      width: 400px;
+    .animation-container {
+      position: relative;
+      width: 300px;
+      height: 300px;
+      margin-bottom: 30px;
+    }
+
+    .img-left, .img-right, .img-final {
+      position: absolute;
+      width: 150px;
       border-radius: 20px;
-      margin-bottom: 20px;
-      box-shadow: 0 8px 24px rgba(0,0,0,.4);
+      opacity: 0;
+      transition: all 2s ease;
+    }
+
+    .img-left {
+      left: -200px;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    .img-right {
+      right: -200px;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    .img-left.move, .img-right.move {
+      opacity: 1;
+    }
+
+    .img-left.move {
+      left: 20px;
+    }
+
+    .img-right.move {
+      right: 20px;
+    }
+
+    .img-final {
+      width: 250px;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%) scale(0.8);
+      opacity: 0;
+      z-index: 2;
+    }
+
+    .img-final.show {
+      opacity: 1;
+      transform: translate(-50%, -50%) scale(1);
     }
 
     .btn {
@@ -49,21 +98,53 @@
       text-decoration: none;
       background: #111;
       color: #fff;
-      transition: 0.2s;
+      transition: 0.3s;
+      opacity: 0;
+      pointer-events: none;
     }
+
     .btn:hover {
       background: #f5d68f;
       color: #111;
     }
+
+    .btn.show {
+      opacity: 1;
+      pointer-events: all;
+    }
   </style>
 </head>
 <body>
+  <div class="animation-container">
+    <img src="img/cupulaimg.png" class="img-left" alt="Imagem 1" />
+    <img src="img/cupulaimg.png" class="img-right" alt="Imagem 2" />
+    <img src="img/cupulaimg.png" class="img-final" alt="Imagem Final" />
+  </div>
+
   <h1>✨ Fique rodeada do que te faz bem ✨</h1>
   <h2>Eu: rodeada do que me faz bem 👍</h2>
 
-  <!-- imagem que você enviou -->
-  <img src="img/perfilkarine.jpeg" alt="Imagem especial" class="hero-img" />
+  <a href="sessoes.html" class="btn">Clique para iniciar</a>
 
-  <a href="index.html" class="btn">Clique para iniciar</a>
+  <script>
+    // Etapas da animação:
+    setTimeout(() => {
+      document.querySelector('.img-left').classList.add('move');
+      document.querySelector('.img-right').classList.add('move');
+    }, 500);
+
+    setTimeout(() => {
+      document.querySelector('.img-final').classList.add('show');
+    }, 3000);
+
+    setTimeout(() => {
+      document.querySelector('h1').classList.add('show');
+      document.querySelector('h2').classList.add('show');
+    }, 3800);
+
+    setTimeout(() => {
+      document.querySelector('.btn').classList.add('show');
+    }, 4500);
+  </script>
 </body>
 </html>

@@ -12,14 +12,15 @@
 }
 
 * { box-sizing:border-box; margin:0; padding:0; }
+
 body {
   font-family: Segoe UI, system-ui, -apple-system, Roboto, sans-serif;
   background: radial-gradient(1200px 800px at 20% 0%, #4b352c 0%, var(--bg) 55%);
   color: var(--text);
-  padding:24px;
-  display:flex;
-  flex-direction:column;
-  gap:28px;
+  min-height: 100vh; /* garante que ocupe toda a altura */
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
 }
 
 /* Intro */
@@ -127,6 +128,45 @@ dialog#choiceDialog::backdrop { background: rgba(0,0,0,.55); }
 
 /* animações */
 @keyframes pop{ from{opacity:0; transform: scale(.96)} to{opacity:1; transform: scale(1)} }
+
+/* >>> Animação dos botões <<< */
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.btn-inicio {
+  display: inline-block;
+  margin: 16px auto;
+  padding: 12px 20px;
+  border-radius: 12px;
+  background: #111;
+  color: #fff;
+  text-decoration: none;
+  font-weight: bold;
+  transition: 0.2s;
+  
+  /* animação */
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeInUp 0.8s ease forwards;
+}
+
+.btn-inicio:hover {
+  background: #f5d68f;
+  color: #111;
+}
+
+/* delays diferentes pros botões */
+.btn-inicio:nth-of-type(1) { animation-delay: 0.5s; }
+.btn-inicio:nth-of-type(2) { animation-delay: 0.9s; }
+.btn-inicio:nth-of-type(3) { animation-delay: 1.3s; }
 
 /* Responsivo */
 @media (max-width:560px) {
