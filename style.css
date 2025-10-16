@@ -1,0 +1,135 @@
+:root {
+  --bg:#3e2c25;
+  --surface:#5c4033;
+  --surface-2:#6e4a3c;
+  --accent:#a97463;
+  --accent-2:#c88f7b;
+  --text:#f4e4d0;
+  --text-sub:#fddbb0;
+  --ring:rgba(255,255,255,.4);
+  --shadow:0 10px 24px rgba(0,0,0,.35);
+  --radius:16px;
+}
+
+* { box-sizing:border-box; margin:0; padding:0; }
+body {
+  font-family: Segoe UI, system-ui, -apple-system, Roboto, sans-serif;
+  background: radial-gradient(1200px 800px at 20% 0%, #4b352c 0%, var(--bg) 55%);
+  color: var(--text);
+  padding:24px;
+  display:flex;
+  flex-direction:column;
+  gap:28px;
+}
+
+/* Intro */
+.intro {
+  display:grid;
+  grid-template-columns: 120px 1fr;
+  gap:18px;
+  align-items:center;
+  max-width:860px;
+  margin-inline:auto;
+}
+.avatar {
+  width:120px; height:120px;
+  border-radius:50%; object-fit:cover;
+  border:4px solid #a1785c;
+  box-shadow:0 0 15px rgba(0,0,0,.35);
+}
+h1 { font-size: clamp(1.4rem, 2.2vw + .6rem, 2.2rem); line-height:1.2; }
+h1 span { color: var(--text-sub); }
+
+/* Cards grid (home) */
+.options {
+  --min: 240px;
+  display:grid;
+  grid-template-columns: repeat(auto-fit, minmax(var(--min), 1fr));
+  gap:18px;
+  max-width:1100px;
+  margin-inline:auto;
+}
+.card {
+  background:linear-gradient(180deg, #5c4033 0%, #553a2f 100%);
+  border-radius:var(--radius);
+  padding:14px;
+  box-shadow:var(--shadow);
+  cursor:pointer;
+  border:1px solid rgba(255,255,255,.06);
+  transition:.2s;
+  text-decoration:none; /* para o <a.card> não sublinhar */
+  color:inherit;
+  display:block;
+}
+.card:hover { transform: translateY(-6px); }
+.card:focus-visible {
+  outline:2px solid var(--ring);
+  outline-offset:4px;
+}
+.card img { width:100%; border-radius:12px; aspect-ratio: 4/3; object-fit:cover; }
+.card h2 { margin-top:10px; font-size:1.15rem; color:var(--text-sub); }
+.card p { margin-top:6px; }
+
+/* Modal (para outras opções) */
+dialog#choiceDialog {
+  border:none;
+  padding:0;
+  border-radius: 14px;
+  width: min(92vw, 520px);
+  background: linear-gradient(180deg, var(--surface-2), #704d40 100%);
+  color:var(--text);
+  box-shadow: var(--shadow);
+  border:1px solid rgba(255,255,255,.08);
+  animation: pop .2s ease both;
+
+  /* centralizado */
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  margin: 0;
+}
+dialog#choiceDialog::backdrop { background: rgba(0,0,0,.55); }
+.dialog-content { padding:20px 22px; }
+.dialog-content p { margin:0 0 12px; }
+.go-btn {
+  display:inline-block; padding:10px 16px;
+  background:var(--accent); color:#fff; text-decoration:none;
+  border-radius:10px; font-weight:600;
+}
+.go-btn:hover { background:var(--accent-2); }
+.dialog-close {
+  position:absolute; top:8px; right:10px;
+  background:transparent; border:none; color:#fff;
+  font-size:24px; cursor:pointer;
+}
+
+/* Página de filmes */
+.movies { max-width:1100px; margin-inline:auto; width:100%; }
+.back-row { margin-bottom:8px; }
+.movies-grid {
+  display:grid; gap:18px;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+.movie-card {
+  background:linear-gradient(180deg, #5c4033 0%, #553a2f 100%);
+  border-radius:var(--radius);
+  overflow:hidden;
+  box-shadow:var(--shadow);
+  border:1px solid rgba(255,255,255,.06);
+  display:grid;
+  grid-template-columns: 1fr;
+}
+.movie-card img { width:100%; height:auto; display:block; aspect-ratio: 3/4; object-fit:cover; }
+.movie-info { padding:14px 16px 18px; display:grid; gap:10px; }
+.movie-info h2 { color:var(--text-sub); font-size:1.2rem; }
+.sinopse { opacity:.95; line-height:1.5; }
+
+/* animações */
+@keyframes pop{ from{opacity:0; transform: scale(.96)} to{opacity:1; transform: scale(1)} }
+
+/* Responsivo */
+@media (max-width:560px) {
+  .intro { grid-template-columns:1fr; text-align:center; }
+  .avatar { margin-inline:auto; }
+}

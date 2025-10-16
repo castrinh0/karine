@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Date com kaka ❤️</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .btn-inicio {
+      display: inline-block;
+      margin: 16px auto;
+      padding: 12px 20px;
+      border-radius: 12px;
+      background: #111;
+      color: #fff;
+      text-decoration: none;
+      font-weight: bold;
+      transition: 0.2s;
+    }
+    .btn-inicio:hover {
+      background: #f5d68f;
+      color: #111;
+    }
+  </style>
+</head>
+<body>
+  <header class="intro" role="banner">
+    <img src="img/perfilkarine.jpeg" alt="Foto da Truca sorrindo" class="avatar" loading="eager" decoding="async" />
+    <h1>Bem-vinda, <span>kaka</span> 💕<br/>Vamos decidir nosso próximo date?</h1>
+  </header>
+
+  <!-- Botão para voltar ao início -->
+  <div style="text-align:center;">
+    <a href="inicio.html" class="btn-inicio">⬅ Voltar ao Início</a>
+  </div>
+
+  <main>
+    <section class="options" aria-label="Opções de date">
+      <!-- Agora o Cinema navega para a outra página -->
+      <a class="card" data-type="cinema" href="filmes.html" aria-label="Cinema no Shopping">
+        <img src="img/principalcine.png" alt="Sala de cinema" loading="lazy" decoding="async" />
+        <h2>Cinema no Shopping</h2>
+        <p>Escolha um filme em cartaz em Salvador 🎬</p>
+      </a>
+
+      <!-- Hamburgueria Cazzola abre nova página -->
+      <a class="card" href="cazolla.html" aria-label="Hamburgueria Cazzola">
+        <img src="img/cazollaimagem.png" alt="Ambiente da Hamburgueria Cazzola" loading="lazy" decoding="async" />
+        <h2>Hamburgueria Cazzola</h2>
+        <p>Hambúrguer artesanal 🍔✨</p>
+      </a>
+
+      <!-- Hamburgueria A Cúpula abre nova página -->
+      <a class="card" href="cupula.html" aria-label="Hamburgueria A Cúpula">
+        <img src="img/cupulaimg.png" alt="Ambiente da Hamburgueria A Cúpula" loading="lazy" decoding="async" />
+        <h2>Hamburgueria A Cúpula</h2>
+        <p>Hambúrguer artesanal com vista 10/10 🍔🔥</p>
+      </a>
+
+      <!-- Praia abre nova página com imagem e animação -->
+      <a class="card" href="praia.html" aria-label="Praia com vibe">
+        <img src="img/praia.jpg" alt="Praia ao pôr do sol" loading="lazy" decoding="async" />
+        <h2>Praia</h2>
+        <p>Pé na areia 🏖️</p>
+      </a>
+    </section>
+  </main>
+
+  <!-- Mantém o dialog para as outras opções -->
+  <dialog id="choiceDialog" aria-modal="true" aria-labelledby="dialogTitle">
+    <button class="dialog-close" aria-label="Fechar">×</button>
+    <div id="dialogContent" class="dialog-content"></div>
+  </dialog>
+
+  <script defer src="script.js"></script>
+</body>
+</html>

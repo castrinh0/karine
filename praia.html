@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Praia com vibe 🏖️</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .page { max-width: 980px; margin: 0 auto; padding: 16px; }
+
+    /* bloco principal com a foto + emojis */
+    .foto-com-emojis {
+      display: flex;
+      align-items: center;
+      gap: 50px;           /* espaço entre a foto e os emojis */
+      flex-wrap: wrap;     /* quebra em telas menores */
+      margin-bottom: 24px;
+    }
+
+    .hero {
+      width: 60%;
+      border-radius: 16px;
+      object-fit: cover;
+      box-shadow: 0 8px 24px rgba(0,0,0,.12);
+    }
+
+    .emojis-col {
+      display: flex;
+      flex-direction: column;  /* emojis em coluna */
+      gap: 16px;
+      align-items: center;
+    }
+
+    .emojis-col img {
+      width: 120px;
+      animation: pulse 1.6s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50%      { transform: scale(1.08); }
+    }
+
+    .actions { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 14px; }
+    .btn { display: inline-block; padding: 12px 18px; border-radius: 12px; text-decoration: none; font-weight: 600; }
+    .btn-primary { background: #111; color: #fff; }
+    .btn-outline { border: 2px solid #111; color: #111; background: #fff; }
+  </style>
+</head>
+<body>
+  <header class="intro" role="banner">
+    <img src="img/perfilkarine.jpeg" alt="Foto da Truca sorrindo" class="avatar" loading="eager" decoding="async" />
+    <h1>Praia com <span>vibe</span> 🏖️</h1>
+  </header>
+
+  <main class="page">
+    <!-- Foto principal + emojis do lado -->
+    <div class="foto-com-emojis">
+      <img class="hero" src="img/karinepraia2.jpeg" alt="Praia linda ao pôr do sol com areia e mar" />
+
+      <div class="emojis-col">
+        <img src="img/praiaemoji.jpg" alt="Emoji babando" />
+        <img src="img/praia emoji2.jpg" alt="Emoji babando 2" />
+      </div>
+    </div>
+
+    <section>
+      <h2>Prainha?</h2>
+      <div class="actions">
+        <a class="btn btn-primary" href="https://w.app/onc5w6" target="_blank" rel="noopener noreferrer">quero esse</a>
+        <a class="btn btn-outline" href="index.html">⬅ Voltar</a>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
