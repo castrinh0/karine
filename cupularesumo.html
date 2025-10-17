@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Date com kaka ❤️</title>
+  <link rel="stylesheet" href="style.css" />
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: radial-gradient(1200px 800px at 20% 0%, #4b352c 0%, #3e2c25 55%);
+      color: #f4e4d0;
+      min-height: 100vh;
+      margin: 0;
+      padding: 0;
+      text-align: center;
+    }
+
+    .intro {
+      margin-top: 40px;
+    }
+
+    h1 {
+      font-size: 1.8rem;
+      margin-bottom: 30px;
+    }
+
+    .btn-inicio {
+      display: inline-block;
+      margin: 16px auto;
+      padding: 12px 20px;
+      border-radius: 12px;
+      background: #111;
+      color: #fff;
+      text-decoration: none;
+      font-weight: bold;
+      transition: 0.2s;
+    }
+    .btn-inicio:hover {
+      background: #f5d68f;
+      color: #111;
+    }
+
+    /* 📸 Área das imagens animadas */
+    .photo-stage {
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      gap: 20px;
+      margin: 40px auto;
+      width: 90%;
+      max-width: 900px;
+    }
+
+    .photo {
+      width: 250px;
+      height: 250px;
+      object-fit: cover;
+      border-radius: 16px;
+      box-shadow: 0 10px 24px rgba(0,0,0,.35);
+      opacity: 0;
+      transform: translateY(-200px);
+      animation: dropIn 1.2s ease forwards;
+    }
+
+    /* Atrasos diferentes para aparecerem em sequência */
+    .photo:nth-child(1) { animation-delay: 0.3s; }
+    .photo:nth-child(2) { animation-delay: 0.7s; }
+    .photo:nth-child(3) { animation-delay: 1.1s; }
+
+    @keyframes dropIn {
+      0% {
+        opacity: 0;
+        transform: translateY(-200px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Card */
+    .card {
+      display: block;
+      text-decoration: none;
+      color: inherit;
+      width: min(92vw, 560px);
+      margin: 40px auto;
+      padding: 14px;
+      border-radius: 16px;
+      background: linear-gradient(180deg, #5c4033 0%, #553a2f 100%);
+      box-shadow: 0 10px 24px rgba(0,0,0,.35);
+      border: 1px solid rgba(255,255,255,.06);
+      transition: transform 0.2s;
+    }
+    .card:hover { transform: translateY(-6px); }
+    .card img {
+      width: 100%;
+      border-radius: 12px;
+      aspect-ratio: 4/3;
+      object-fit: cover;
+    }
+    .card h2 { margin-top: 10px; color: #fddbb0; }
+
+    /* 🗺️ Mapa */
+    .map-section {
+      width: min(92vw, 900px);
+      margin: 50px auto;
+    }
+    .map-section h2 {
+      margin: 6px 0 12px;
+      color: #fddbb0;
+      text-align: center;
+    }
+    .map-wrap {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16/9;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 10px 24px rgba(0,0,0,.35);
+      border: 1px solid rgba(255,255,255,.06);
+    }
+    .map-wrap iframe {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+  </style>
+</head>
+<body>
+  <header class="intro" role="banner">
+    <img src="img/perfilkarine.jpeg" alt="Foto da Truca sorrindo" class="avatar" />
+    <h1>Bora ver o resumo na Cupula? 😎</h1>
+  </header>
+
+  <!-- 📸 Animação das imagens lado a lado -->
+  <section class="photo-stage">
+    <img src="img/euekakacupula.jpeg" alt="Momentos do date - 1" class="photo" />
+    <img src="img/kakaurguer.jpeg" alt="Momentos do date - 2" class="photo" />
+    <img src="img/cupulahamburger.jpeg" alt="Momentos do date - 3" class="photo" />
+  </section>
+
+  <!-- Botão para voltar ao início -->
+  <div style="text-align:center;">
+    <a href="inicio.html" class="btn-inicio">⬅ Voltar ao Início</a>
+  </div>
+
+
+  <!-- 🗺️ Mapa -->
+  <section class="map-section">
+    <h2>📍Onde foi?</h2>
+    <div class="map-wrap">
+      <iframe
+        src="https://www.google.com/maps?q=-12.9548576,-38.5007424&hl=pt-BR&z=17&output=embed"
+        allowfullscreen=""
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+        title="Mapa - A Cúpula Burguer">
+      </iframe>
+    </div>
+  </section>
+
+  <script defer src="script.js"></script>
+</body>
+</html>
