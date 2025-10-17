@@ -173,3 +173,17 @@ dialog#choiceDialog::backdrop { background: rgba(0,0,0,.55); }
   .intro { grid-template-columns:1fr; text-align:center; }
   .avatar { margin-inline:auto; }
 }
+/* Destaques especiais - já ficam mais escuras */
+.cal-day.is-special-cupula {
+  background: #1a1a1a !important; /* escuro direto */
+  color: #f5d68f;
+  border: 2px solid #f5d68f;
+  transform: scale(1.05);
+}
+
+.cal-day.is-special-leo {
+  background: #1a1a1a !important; /* escuro direto */
+  color: #f5d68f;
+  border: 2px solid #f5d68f;
+  transform: scale(1.05);
+}

@@ -17,12 +17,93 @@
       font-weight: bold;
       transition: 0.2s;
     }
-    .btn-inicio:hover {
-      background: #f5d68f;
-      color: #111;
+    .btn-inicio:hover { background: #f5d68f; color: #111; }
+
+    /* ==== Calendário ==== */
+    .calendar {
+      width: min(92vw, 900px);
+      margin: 18px auto 26px;
+      background: linear-gradient(180deg, #5c4033 0%, #553a2f 100%);
+      border: 1px solid rgba(255,255,255,.08);
+      border-radius: 16px;
+      box-shadow: 0 10px 24px rgba(0,0,0,.35);
+      color: var(--text, #f4e4d0);
+      overflow: hidden;
+    }
+    .cal-header {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 12px 16px; background: rgba(0,0,0,.18);
+    }
+    .cal-title { font-weight: 700; letter-spacing: .3px; color: var(--text-sub, #fddbb0); }
+    .cal-nav { display: flex; gap: 8px; }
+    .cal-btn {
+      background: #111; color: #fff; border: 0; cursor: pointer;
+      padding: 8px 12px; border-radius: 10px; font-weight: 600;
+    }
+    .cal-btn:hover { background: #f5d68f; color: #111; }
+
+    .cal-weekdays, .cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); }
+    .cal-weekdays {
+      background: rgba(0,0,0,.12); font-weight: 700; color: rgba(255,255,255,.85);
+    }
+    .cal-weekdays div, .cal-day { padding: 12px; text-align: center; }
+
+    .cal-day {
+      position: relative; aspect-ratio: 1/1; display: grid; place-items: center;
+      cursor: pointer;
+      transition: transform .15s ease, background .15s ease, box-shadow .15s ease;
+      border: 1px solid rgba(255,255,255,.05);
+      font-weight: 600; background: transparent; color: inherit;
+    }
+    .cal-day:hover {
+      transform: translateY(-2px);
+      background: rgba(0,0,0,.14);
+      box-shadow: 0 6px 16px rgba(0,0,0,.25) inset;
+    }
+    .cal-day.is-today {
+      outline: 2px solid rgba(255,255,255,.6);
+      outline-offset: -4px; border-radius: 12px;
+    }
+    .cal-day.is-other { opacity: .38; }
+
+    /* Destaques especiais */
+    .cal-day.is-special-cupula {
+      background: rgba(200,143,123,.22);
+      border-color: rgba(255,255,255,.2);
+    }
+    .cal-day.is-special-cupula:hover {
+      background: rgba(200,143,123,.34);
+    }
+    .cal-day.is-special-leo {
+      background: rgba(169,116,99,.28);
+      border-color: rgba(255,255,255,.2);
+    }
+    .cal-day.is-special-leo:hover {
+      background: rgba(169,116,99,.4);
     }
 
-    /* estilo dos cards */
+    /* 🔥 Quando a data for selecionada */
+    .cal-day.is-selected {
+      background: #1a1a1a !important;
+      color: #f5d68f;
+      border: 2px solid #f5d68f;
+      transform: scale(1.05);
+    }
+
+    .cal-legend {
+      display:flex; gap:14px; align-items:center; padding:10px 14px; font-size:.95rem;
+      background: rgba(0,0,0,.12);
+    }
+    .leg-dot { width:14px; height:14px; border-radius:4px; display:inline-block; margin-right:6px; }
+    .leg-cupula { background: rgba(200,143,123,.7); }
+    .leg-leo    { background: rgba(169,116, 99,.8); }
+
+    @media (max-width: 520px) {
+      .cal-day { font-size: .95rem; }
+      .cal-btn { padding: 8px 10px; }
+    }
+
+    /* ==== Cards ==== */
     .card {
       display: block;
       text-decoration: none;
@@ -37,31 +118,36 @@
       transition: transform 0.2s;
       text-align: left;
     }
-
     .card:hover { transform: translateY(-6px); }
-    .card img {
-      width: 100%;
-      border-radius: 12px;
-      aspect-ratio: 4/3;
-      object-fit: cover;
-    }
-    .card h2 { 
-      margin-top: 10px;
-      color: #fddbb0;
-      font-size: 1.4rem;
-    }
-    .card p { 
-      margin-top: 6px;
-      font-size: 1rem;
-      opacity: 0.9;
-    }
+    .card img { width: 100%; border-radius: 12px; aspect-ratio: 4/3; object-fit: cover; }
+    .card h2 { margin-top: 10px; color: #fddbb0; font-size: 1.4rem; }
+    .card p { margin-top: 6px; font-size: 1rem; opacity: 0.9; }
   </style>
 </head>
 <body>
   <header class="intro" role="banner">
     <img src="img/perfilkarine.jpeg" alt="Foto da Truca sorrindo" class="avatar" loading="eager" decoding="async" />
-    <h1>Bora ver o resumo das coisas? Selecione o date e relembre 😎</h1>
+    <h1>Bora ver o resumo das coisas? Selecione uma data em destaque e relembre 😎</h1>
   </header>
+
+  <!-- ===== Calendário no início ===== -->
+  <section class="calendar" aria-label="Calendário de dates">
+    <div class="cal-header">
+      <button class="cal-btn" id="prevMonth" aria-label="Mês anterior">←</button>
+      <div class="cal-title" id="calTitle">Mês Ano</div>
+      <button class="cal-btn" id="nextMonth" aria-label="Próximo mês">→</button>
+    </div>
+
+    <div class="cal-weekdays" aria-hidden="true">
+      <div>Dom</div><div>Seg</div><div>Ter</div><div>Qua</div><div>Qui</div><div>Sex</div><div>Sáb</div>
+    </div>
+    <div class="cal-grid" id="calGrid" role="grid" aria-label="Dias do mês"></div>
+
+    <div class="cal-legend" aria-hidden="true">
+      <span><i class="leg-dot leg-cupula"></i> 15/10/2025 — A Cúpula</span>
+      <span><i class="leg-dot leg-leo"></i> 24/09/2025 — Bar do Léo</span>
+    </div>
+  </section>
 
   <!-- Botão para voltar ao início -->
   <div style="text-align:center;">
@@ -81,6 +167,114 @@
     <h2>Bar do Léo</h2>
     <p>Chop de vinho delícia com a delícia 🍹</p>
   </a>
+
+  <script>
+    (function() {
+      const calTitle = document.getElementById('calTitle');
+      const calGrid  = document.getElementById('calGrid');
+      const prevBtn  = document.getElementById('prevMonth');
+      const nextBtn  = document.getElementById('nextMonth');
+
+      // Datas especiais (yyyy-mm-dd → destino + classe)
+      const SPECIALS = {
+        '2025-10-15': { href: 'cupularesumo.html', cls: 'is-special-cupula' },
+        '2025-09-24': { href: 'bardoleo.html',      cls: 'is-special-leo'    },
+      };
+
+      const today = new Date();
+      let viewYear  = today.getFullYear();
+      let viewMonth = today.getMonth(); // 0=jan
+
+      const MONTHS_PT = [
+        'Janeiro','Fevereiro','Março','Abril','Maio','Junho',
+        'Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'
+      ];
+
+      function pad(n){ return String(n).padStart(2, '0'); }
+      function ymd(d){ return `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`; }
+
+      function render() {
+        calTitle.textContent = `${MONTHS_PT[viewMonth]} de ${viewYear}`;
+
+        const firstOfMonth = new Date(viewYear, viewMonth, 1);
+        const startWeekday = firstOfMonth.getDay();
+        const daysInMonth  = new Date(viewYear, viewMonth+1, 0).getDate();
+        const prevMonthDays = new Date(viewYear, viewMonth, 0).getDate();
+
+        calGrid.innerHTML = '';
+
+        // Dias do mês anterior
+        for (let i = startWeekday; i > 0; i--) {
+          const dayNum = prevMonthDays - i + 1;
+          const d = new Date(viewYear, viewMonth-1, dayNum);
+          calGrid.appendChild(makeDayCell(d, true));
+        }
+
+        // Dias do mês atual
+        for (let day = 1; day <= daysInMonth; day++) {
+          const d = new Date(viewYear, viewMonth, day);
+          calGrid.appendChild(makeDayCell(d, false));
+        }
+
+        // Dias do próximo mês
+        const remainder = calGrid.children.length % 7;
+        if (remainder !== 0) {
+          const toAdd = 7 - remainder;
+          for (let i = 1; i <= toAdd; i++) {
+            const d = new Date(viewYear, viewMonth+1, i);
+            calGrid.appendChild(makeDayCell(d, true));
+          }
+        }
+      }
+
+      function makeDayCell(dateObj, isOtherMonth) {
+        const cell = document.createElement('button');
+        cell.type = 'button';
+        cell.className = 'cal-day' + (isOtherMonth ? ' is-other' : '');
+        cell.textContent = dateObj.getDate();
+
+        const id = ymd(dateObj);
+        const isToday = id === ymd(today);
+        if (isToday) cell.classList.add('is-today');
+
+        // Clique -> marcar selecionado
+        cell.addEventListener('click', () => {
+          document.querySelectorAll('.cal-day.is-selected').forEach(d => d.classList.remove('is-selected'));
+          cell.classList.add('is-selected');
+
+          if (SPECIALS[id]) {
+            window.location.href = SPECIALS[id].href;
+          } else {
+            alert('Ainda não tem nada programado para esta data 😉');
+          }
+        });
+
+        // Marca especiais
+        if (SPECIALS[id]) {
+          cell.classList.add(SPECIALS[id].cls);
+        }
+
+        cell.setAttribute('aria-label',
+          `Dia ${dateObj.getDate()} de ${MONTHS_PT[dateObj.getMonth()]} de ${dateObj.getFullYear()}`
+        );
+
+        return cell;
+      }
+
+      prevBtn.addEventListener('click', () => {
+        viewMonth--;
+        if (viewMonth < 0) { viewMonth = 11; viewYear--; }
+        render();
+      });
+      nextBtn.addEventListener('click', () => {
+        viewMonth++;
+        if (viewMonth > 11) { viewMonth = 0; viewYear++; }
+        render();
+      });
+
+      render();
+    })();
+  </script>
 
   <script defer src="script.js"></script>
 </body>
