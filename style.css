@@ -131,14 +131,8 @@ dialog#choiceDialog::backdrop { background: rgba(0,0,0,.55); }
 
 /* >>> Animação dos botões <<< */
 @keyframes fadeInUp {
-  0% {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  0% { opacity: 0; transform: translateY(30px); }
+  100%{ opacity: 1; transform: translateY(0); }
 }
 
 .btn-inicio {
@@ -151,39 +145,114 @@ dialog#choiceDialog::backdrop { background: rgba(0,0,0,.55); }
   text-decoration: none;
   font-weight: bold;
   transition: 0.2s;
-  
-  /* animação */
   opacity: 0;
   transform: translateY(30px);
   animation: fadeInUp 0.8s ease forwards;
 }
-
-.btn-inicio:hover {
-  background: #f5d68f;
-  color: #111;
-}
+.btn-inicio:hover { background: #f5d68f; color: #111; }
 
 /* delays diferentes pros botões */
 .btn-inicio:nth-of-type(1) { animation-delay: 0.5s; }
 .btn-inicio:nth-of-type(2) { animation-delay: 0.9s; }
 .btn-inicio:nth-of-type(3) { animation-delay: 1.3s; }
 
+/* ===== Galeria responsiva com animação (para páginas de resumo) ===== */
+.photo-stage{
+  display:flex;
+  justify-content:center;
+  align-items:flex-start;
+  gap:20px;
+  margin:40px auto;
+  width:90%;
+  max-width:900px;
+  flex-wrap:wrap;            /* permite quebrar linha no mobile */
+}
+.photo{
+  width:clamp(120px, 28vw, 250px); /* cresce até 250px no desktop */
+  aspect-ratio:1 / 1;              /* mantém quadrado */
+  height:auto;
+  object-fit:cover;
+  border-radius:16px;
+  box-shadow:0 10px 24px rgba(0,0,0,.35);
+  opacity:0;
+  transform:translateY(-200px);
+  animation:dropIn 1.2s ease forwards;
+}
+.photo:nth-child(1){ animation-delay:.3s; }
+.photo:nth-child(2){ animation-delay:.7s; }
+.photo:nth-child(3){ animation-delay:1.1s; }
+
+@keyframes dropIn{
+  0%{ opacity:0; transform:translateY(-200px); }
+  100%{ opacity:1; transform:translateY(0); }
+}
+
+@media (max-width:480px){
+  .photo-stage{ gap:12px; }
+  .photo{ width:clamp(120px, 42vw, 220px); } /* duas por linha no celular */
+}
+
+/* ===== Calendário (base) - use estas classes na página do calendário ===== */
+.calendar{
+  width:min(92vw, 900px);
+  margin:18px auto 26px;
+  background:linear-gradient(180deg, #5c4033 0%, #553a2f 100%);
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:16px;
+  box-shadow:var(--shadow);
+  color:var(--text);
+  overflow:hidden;
+}
+.cal-header{
+  display:flex; align-items:center; justify-content:space-between;
+  padding:12px 16px; background:rgba(0,0,0,.18);
+}
+.cal-title{ font-weight:700; letter-spacing:.3px; color:var(--text-sub); }
+.cal-nav{ display:flex; gap:8px; }
+.cal-btn{
+  background:#111; color:#fff; border:0; cursor:pointer;
+  padding:8px 12px; border-radius:10px; font-weight:600;
+}
+.cal-btn:hover{ background:#f5d68f; color:#111; }
+
+.cal-weekdays, .cal-grid{ display:grid; grid-template-columns:repeat(7,1fr); }
+.cal-weekdays{ background:rgba(0,0,0,.12); font-weight:700; color:rgba(255,255,255,.85); }
+.cal-weekdays div, .cal-day{ padding:12px; text-align:center; }
+
+.cal-day{
+  position:relative; aspect-ratio:1/1; display:grid; place-items:center;
+  cursor:pointer;
+  transition:transform .15s ease, background .15s ease, box-shadow .15s ease;
+  border:1px solid rgba(255,255,255,.05);
+  font-weight:600; background:transparent; color:inherit;
+}
+.cal-day:hover{
+  transform:translateY(-2px);
+  background:rgba(0,0,0,.14);
+  box-shadow:0 6px 16px rgba(0,0,0,.25) inset;
+}
+.cal-day.is-today{
+  outline:2px solid rgba(255,255,255,.6);
+  outline-offset:-4px; border-radius:12px;
+}
+.cal-day.is-other{ opacity:.38; }
+
+@media (max-width:520px){
+  .cal-day{ font-size:.95rem; }
+  .cal-btn{ padding:8px 10px; }
+}
+
+/* ===== Destaques especiais no calendário (escuros por padrão) ===== */
+.cal-day.is-special-cupula,
+.cal-day.is-special-leo{
+  background:#1a1a1a !important; /* escuro direto */
+  color:#f5d68f;
+  border:2px solid #f5d68f;
+  transform:scale(1.05);
+}
+
 /* Responsivo */
 @media (max-width:560px) {
   .intro { grid-template-columns:1fr; text-align:center; }
   .avatar { margin-inline:auto; }
-}
-/* Destaques especiais - já ficam mais escuras */
-.cal-day.is-special-cupula {
-  background: #1a1a1a !important; /* escuro direto */
-  color: #f5d68f;
-  border: 2px solid #f5d68f;
-  transform: scale(1.05);
-}
-
-.cal-day.is-special-leo {
-  background: #1a1a1a !important; /* escuro direto */
-  color: #f5d68f;
-  border: 2px solid #f5d68f;
-  transform: scale(1.05);
 }
