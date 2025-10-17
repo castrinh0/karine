@@ -21,12 +21,46 @@
       background: #f5d68f;
       color: #111;
     }
+
+    /* estilo dos cards */
+    .card {
+      display: block;
+      text-decoration: none;
+      color: inherit;
+      width: min(92vw, 560px);
+      margin: 30px auto;
+      padding: 14px;
+      border-radius: 16px;
+      background: linear-gradient(180deg, #5c4033 0%, #553a2f 100%);
+      box-shadow: 0 10px 24px rgba(0,0,0,.35);
+      border: 1px solid rgba(255,255,255,.06);
+      transition: transform 0.2s;
+      text-align: left;
+    }
+
+    .card:hover { transform: translateY(-6px); }
+    .card img {
+      width: 100%;
+      border-radius: 12px;
+      aspect-ratio: 4/3;
+      object-fit: cover;
+    }
+    .card h2 { 
+      margin-top: 10px;
+      color: #fddbb0;
+      font-size: 1.4rem;
+    }
+    .card p { 
+      margin-top: 6px;
+      font-size: 1rem;
+      opacity: 0.9;
+    }
   </style>
 </head>
 <body>
   <header class="intro" role="banner">
     <img src="img/perfilkarine.jpeg" alt="Foto da Truca sorrindo" class="avatar" loading="eager" decoding="async" />
-    <h1>Bora ver o resumo das coisas? selecione o date e relembre😎</h1>
+    <h1>Bora ver o resumo das coisas? Selecione o date e relembre 😎</h1>
   </header>
 
   <!-- Botão para voltar ao início -->
@@ -34,13 +68,20 @@
     <a href="inicio.html" class="btn-inicio">⬅ Voltar ao Início</a>
   </div>
 
-        <!-- Hamburgueria A Cúpula abre nova página -->
-      <a class="card" href="cupularesumo.html" aria-label="Hamburgueria A Cúpula">
-        <img src="img/cupulaimg.png" alt="Ambiente da Hamburgueria A Cúpula" loading="lazy" decoding="async" />
-        <h2>Hamburgueria A Cúpula</h2>
-        <p>Hambúrguer artesanal com vista 10/10 🍔🔥</p>
-      </a>
- 
+  <!-- 🍔 Hamburgueria A Cúpula -->
+  <a class="card" href="cupularesumo.html" aria-label="Hamburgueria A Cúpula">
+    <img src="img/cupulaimg.png" alt="Ambiente da Hamburgueria A Cúpula" loading="lazy" decoding="async" />
+    <h2>Hamburgueria A Cúpula</h2>
+    <p>Hambúrguer artesanal com vista 10/10 🍔🔥</p>
+  </a>
+
+  <!-- 🍻 Bar do Léo -->
+  <a class="card" href="bardoleo.html" aria-label="Bar do Léo">
+    <img src="img/bardoleo.png" alt="Ambiente do Bar do Léo" loading="lazy" decoding="async" />
+    <h2>Bar do Léo</h2>
+    <p>Chop de vinho delícia com a delícia 🍹</p>
+  </a>
+
   <script defer src="script.js"></script>
 </body>
 </html>
